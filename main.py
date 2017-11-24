@@ -123,17 +123,17 @@ class LabelTool():
         if not dbg:
             s = self.entry.get()
             self.parent.focus()
-            self.category = int(s)
+            self.category = int(len(s))
         else:
-            s = r'D:\workspace\python\labelGUI'
+            s = r'D:\temp\training data set - Lisence Plate\testdata'
 ##        if not os.path.isdir(s):
 ##            tkMessageBox.showerror("Error!", message = "The specified dir doesn't exist!")
 ##            return
         # get image list
-        self.imageDir = os.path.join(r'./Images', '%03d' %(self.category))
-        self.imageList = glob.glob(os.path.join(self.imageDir, '*.JPEG'))
+        self.imageDir = os.path.join(r'./Images')
+        self.imageList = glob.glob(os.path.join(self.imageDir, '*.JPG'))
         if len(self.imageList) == 0:
-            print 'No .JPEG images found in the specified dir!'
+            print 'No .JPG images found in the specified dir!'
             return
 
         # default to the 1st image in the collection
@@ -141,15 +141,15 @@ class LabelTool():
         self.total = len(self.imageList)
 
          # set up output dir
-        self.outDir = os.path.join(r'./Labels', '%03d' %(self.category))
+        self.outDir = os.path.join(r'./Labels')
         if not os.path.exists(self.outDir):
             os.mkdir(self.outDir)
 
         # load example bboxes
-        self.egDir = os.path.join(r'./Examples', '%03d' %(self.category))
+        self.egDir = os.path.join(r'./Examples')
         if not os.path.exists(self.egDir):
             return
-        filelist = glob.glob(os.path.join(self.egDir, '*.JPEG'))
+        filelist = glob.glob(os.path.join(self.egDir, '*.JPG'))
         self.tmp = []
         self.egList = []
         random.shuffle(filelist)
